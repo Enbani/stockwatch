@@ -1,20 +1,22 @@
 require('./config/config');
-
+// require packages
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const app = express();
-
+// set constants based on env variables
 const port = process.env.PORT;
 const environment = process.env.ENVIRONMENT;
 
+// init app
+const app = express();
+// treat all requests as json
 app.use(bodyParser.json());
 
-app.get('/', (req, res) => {
-  res.send({
-    payload: 'success!'
-  });
-});
+const stocks = require('./routes/stockRoutes');
+
+// set API routes
+app.use('/api/v1/stocks', stocks);
+
 
 app.listen(port, () => {
   console.log(`app server started at port ${port}`);
