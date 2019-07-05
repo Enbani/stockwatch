@@ -1,17 +1,32 @@
+// require packages
 const express = require('express');
 const axios = require('axios');
+// require models
+const { Stock } = require('../models/stock');
+
+// define API key for World Trading Data API
+const apiKey = process.env.WTD_API_KEY;
 
 const router = express.Router();
-const apiKey = process.env.WTD_API_KEY;
 
 // fetch overview stock data
 router.get('/overview', async (req, res) => {
   const { stock } = req.query;
 
   try {
-    const stockData = await axios.get(`https://api.worldtradingdata.com/api/v1/stock?symbol=${stock}&api_token=${apiKey}`);
-    console.log(stockData.data);
-    return res.send({ payload: stockData.data });
+    const data = await axios.get(`https://api.worldtradingdata.com/api/v1/stock?symbol=${stock}&api_token=${apiKey}`);
+    const stockData = data.data.data[0];
+    const body = {
+      symbol: stockData.symbol,
+      description: stockData.name,
+      currency: stockData.currency,
+      exchange: stockData.stock_exchange_long
+    };
+
+    const newStock = new Stock(body);
+    const savedStock = await newStock.save();
+
+    return res.send({ payload: savedStock });
   } catch (e) {
     return res.status(400).send({ error: e.message });
   }
