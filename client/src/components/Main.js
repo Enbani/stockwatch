@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+
+// import components
+// import Card from './common/card';
+import { Card, Carosel } from './common';
+// import actions
 import { fetchStocks } from '../actions/stocksActions';
 
 
@@ -10,9 +14,9 @@ class Main extends Component {
   }
 
   render() {
-    console.log(this.props.stocksList)
     return(
-      <h1>Helloooo</h1>
+      <Carosel
+      />
     )
   }
 };

@@ -1,0 +1,29 @@
+.card-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 1rem 1rem 1rem 1rem;
+  margin: 1rem 1rem 1rem 1rem;
+  border: 1px solid blue;
+  height: 30vh;
+  width: 70vw;
+}
+
+.card-close {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+
+.card-title {
+  font-size: 1rem;
+}
+
+.card-body {
+  font-size: .7rem;
+}
+
+.card-footer {
+  font-size: .5rem;
+}
