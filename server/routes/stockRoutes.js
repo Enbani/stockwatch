@@ -60,7 +60,7 @@ router.delete('/remove-stock/:id', async (req, res) => {
 
   try {
     const stock = await Stock.findOneAndRemove({ _id: id });
-    return res.send({ payload: 'stock removed.' });
+    return res.send({ payload: stock });
   } catch (e) {
     return res.status(400).send({ error: e.message });
   }

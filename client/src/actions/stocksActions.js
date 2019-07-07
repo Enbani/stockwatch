@@ -1,4 +1,4 @@
-import { GET_STOCKS } from './actionTypes';
+import { GET_STOCKS, ADD_STOCK,  REMOVE_STOCK } from './actionTypes';
 import axios from 'axios';
 
 export const addStocksList = (data) => {
@@ -7,6 +7,21 @@ export const addStocksList = (data) => {
     payload: data
   }
 };
+
+export const addSingleStock = (data) => {
+  console.log('this is singleStock: ', data)
+  return {
+    type: ADD_STOCK,
+    payload: data
+  }
+}
+
+export const removeSingleStock = (data) => {
+  return {
+    type: REMOVE_STOCK,
+    payload: data
+  }
+}
 
 // request saved stocks from server and add to store
 export const fetchStocks = () => {
@@ -26,7 +41,22 @@ export const addStock = (ticker) => {
   return async dispatch => {
     try {
       const stocksResponse = await axios.get(`/api/v1/stocks/add-stock?stock=${ticker}`);
+      console.log(stocksResponse);
+      let newStock = [stocksResponse.data.payload];
+
+      dispatch(addSingleStock(newStock));
+    } catch (e) {
+      console.log(e)
+    }
+  }
+}
+
+export const removeStock = (id) => {
+  return async dispatch => {
+    try {
+      const stocksResponse = await axios.delete(`/api/v1/stocks/remove-stock/${id}`);
       console.log(stocksResponse)
+      dispatch(removeSingleStock(stocksResponse.data.payload));
     } catch (e) {
       console.log(e)
     }

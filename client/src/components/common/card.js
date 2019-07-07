@@ -12,6 +12,12 @@ const Card = (props) => {
       <div className='card-footer'>
         <p>{props.footer}</p>
       </div>
+      <div className='card-close'>
+        <button
+          value={props.closeButtonValue}
+          onClick={props.onCloseClick}
+          >X</button>
+      </div>
     </div>
   )
 };

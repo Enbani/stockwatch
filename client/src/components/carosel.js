@@ -1,21 +1,29 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Card } from './'
+import { Card } from './common'
+
+import { removeStock } from '../actions/stocksActions';
 
 class Carosel extends Component {
+
+  onCardClose(evt) {
+    this.props.removeStock(evt.target.value)
+  }
 
   caroselList() {
     let { stocksList } = this.props;
     console.log('this is stocksList: ', stocksList);
 
     let stocks = stocksList.map((stock, index) => {
-      let key = `card-${index}`;
+
       return(
         <Card
-          key={key}
+          key={stock._id}
           title={stock.symbol}
           body={stock.description}
           footer={stock.exchange}
+          closeButtonValue={stock._id}
+          onCloseClick={this.onCardClose.bind(this)}
           />
       )
     })
@@ -38,4 +46,4 @@ const mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps, {})(Carosel);
+export default connect(mapStateToProps, { removeStock })(Carosel);
