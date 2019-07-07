@@ -1,0 +1,18 @@
+.styled-button {
+  background: $app-green;
+  border: .3rem solid $app-green;
+  font-weight: bold;
+  color: $button-text;
+  border-radius: .6rem;
+  -moz-border-radius: .6rem;
+  -webkit-border-radius: .6rem;
+  width: 7vw;
+  height: 7vh;
+  padding: .5rem;
+  margin: 1rem;
+
+}
+
+.styled-button:disabled {
+  opacity: .5;
+}

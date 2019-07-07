@@ -1,10 +1,23 @@
+@import './settings/_settings.scss';
 @import './components/card.scss';
 @import './components/carosel.scss';
+@import './components/nav.scss';
+@import './components/tickerSearch.scss';
+@import './components/button.scss';
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+.page {
+  background-color: #0f0f0f;
+  min-height: 100vh;
+}
+
+h1,p{
+ color: #87e681;
 }
 
 // html {

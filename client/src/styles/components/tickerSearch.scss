@@ -1,0 +1,21 @@
+.ticker-search-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 10vh;
+}
+
+.ticker-search-field {
+  width: 40vw;
+  height: 5vh;
+  margin: 1rem;
+  font-size: 2rem;
+}
+
+@media only screen and (min-width: 768px) {
+  .ticker-search-container {
+    flex-direction: row;
+  }
+}

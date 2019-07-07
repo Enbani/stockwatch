@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 // import components
-// import Card from './common/card';
-import { Card, Carosel } from './common';
+import { Card, Carosel, Nav } from './common';
+import TickerSearch from './tickerSearch';
 // import actions
 import { fetchStocks } from '../actions/stocksActions';
 
@@ -15,8 +15,15 @@ class Main extends Component {
 
   render() {
     return(
-      <Carosel
-      />
+      <div className='page'>
+        <Nav
+          title='Stock-Watch Demo'
+          titleStyle='nav-title'
+        />
+        <TickerSearch/>
+        <Carosel
+        />
+      </div>
     )
   }
 };

@@ -5,9 +5,9 @@
   justify-content: space-between;
   padding: 1rem 1rem 1rem 1rem;
   margin: 1rem 1rem 1rem 1rem;
-  border: 1px solid blue;
+  border: 1px solid $app-green;
   height: 30vh;
-  width: 70vw;
+  width: 60vw;
 }
 
 .card-close {
@@ -26,4 +26,11 @@
 
 .card-footer {
   font-size: .5rem;
+}
+
+@media only screen and (min-width: 440px) {
+  .card-container {
+    height: 30vh;
+    width: 30vw;
+  }
 }

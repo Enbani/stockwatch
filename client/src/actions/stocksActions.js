@@ -20,3 +20,15 @@ export const fetchStocks = () => {
     }
   }
 };
+
+export const addStock = (ticker) => {
+  console.log(ticker);
+  return async dispatch => {
+    try {
+      const stocksResponse = await axios.get(`/api/v1/stocks/add-stock?stock=${ticker}`);
+      console.log(stocksResponse)
+    } catch (e) {
+      console.log(e)
+    }
+  }
+}

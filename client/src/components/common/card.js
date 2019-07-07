@@ -12,9 +12,6 @@ const Card = (props) => {
       <div className='card-footer'>
         <p>{props.footer}</p>
       </div>
-      <div className='card-close'>
-        <p>X</p>
-      </div>
     </div>
   )
 };
