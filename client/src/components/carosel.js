@@ -2,12 +2,17 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Card } from './common'
 
-import { removeStock } from '../actions/stocksActions';
+import { removeStock, getHistorical } from '../actions/stocksActions';
 
 class Carosel extends Component {
 
   onCardClose(evt) {
     this.props.removeStock(evt.target.value)
+  }
+
+  onCardClick(e) {
+    const symbol = e.currentTarget.id;
+    this.props.getHistorical(symbol);
   }
 
   caroselList() {
@@ -19,11 +24,13 @@ class Carosel extends Component {
       return(
         <Card
           key={stock._id}
+          cardId={stock.symbol}
           title={stock.symbol}
           body={stock.description}
           footer={stock.exchange}
           closeButtonValue={stock._id}
           onCloseClick={this.onCardClose.bind(this)}
+          onCardClick={this.onCardClick.bind(this)}
           />
       )
     })
@@ -46,4 +53,4 @@ const mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps, { removeStock })(Carosel);
+export default connect(mapStateToProps, { removeStock, getHistorical })(Carosel);

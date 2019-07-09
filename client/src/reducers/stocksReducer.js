@@ -1,9 +1,11 @@
 // import actions
-import { GET_STOCKS, ADD_STOCK, REMOVE_STOCK } from '../actions/actionTypes';
+import { GET_STOCKS, ADD_STOCK, REMOVE_STOCK, ADD_HISTORY } from '../actions/actionTypes';
 
 // define initial state
 const INITIAL_STATE =  {
-  stocksList: []
+  stocksList: [],
+  focusStock: '',
+  history: {}
 };
 
 // export reducer
@@ -30,9 +32,16 @@ export default (state = INITIAL_STATE, action) => {
         return true
       })
 
-      return{
+      return {
         ...state,
         stocksList: filteredStocks
+      }
+    case ADD_HISTORY:
+      let { history, name } = action.payload;
+      return  {
+        ...state,
+        focusStock: name,
+        history
       }
     default:
       return state;

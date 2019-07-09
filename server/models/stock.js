@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 
 const StockSchema = new mongoose.Schema({
   symbol: {
-    type: String
+    type: String,
+    unique: true
   },
   description: {
     type: String

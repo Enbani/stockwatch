@@ -1,4 +1,4 @@
-import { GET_STOCKS, ADD_STOCK,  REMOVE_STOCK } from './actionTypes';
+import { GET_STOCKS, ADD_STOCK,  REMOVE_STOCK, ADD_HISTORY } from './actionTypes';
 import axios from 'axios';
 
 export const addStocksList = (data) => {
@@ -19,6 +19,13 @@ export const addSingleStock = (data) => {
 export const removeSingleStock = (data) => {
   return {
     type: REMOVE_STOCK,
+    payload: data
+  }
+}
+
+export const addHistory = (data) => {
+  return {
+    type: ADD_HISTORY,
     payload: data
   }
 }
@@ -57,6 +64,21 @@ export const removeStock = (id) => {
       const stocksResponse = await axios.delete(`/api/v1/stocks/remove-stock/${id}`);
       console.log(stocksResponse)
       dispatch(removeSingleStock(stocksResponse.data.payload));
+    } catch (e) {
+      console.log(e)
+    }
+  }
+}
+
+
+
+export const getHistorical = (symbol) => {
+  return async dispatch => {
+    try {
+      const histResponse = await axios.get(`/api/v1/stocks/historical?stock=${symbol}`);
+      console.log(histResponse);
+      let { history, name } =  histResponse.data.payload;
+
     } catch (e) {
       console.log(e)
     }

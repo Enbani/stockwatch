@@ -2,7 +2,7 @@ import React from 'react';
 
 const Card = (props) => {
   return(
-    <div className='card-container' key={props.id}>
+    <div className='card-container' id={props.cardId} key={props.id} onClick={props.onCardClick}>
       <div className='card-title'>
         <h1>{props.title}</h1>
       </div>
