@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 // import components
-import { Card, Nav } from './common';
+import { Nav } from './common';
 import TickerSearch from './tickerSearch';
 import Carosel from './carosel';
 import StockChart from './stockCharts';

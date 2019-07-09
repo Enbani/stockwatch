@@ -5,7 +5,9 @@ import { GET_STOCKS, ADD_STOCK, REMOVE_STOCK, ADD_HISTORY } from '../actions/act
 const INITIAL_STATE =  {
   stocksList: [],
   focusStock: '',
-  history: {}
+  history: {},
+  historyDates: [],
+  historyPrices: []
 };
 
 // export reducer
@@ -37,11 +39,14 @@ export default (state = INITIAL_STATE, action) => {
         stocksList: filteredStocks
       }
     case ADD_HISTORY:
-      let { history, name } = action.payload;
+      let { history, name, historyDates, historyPrices } = action.payload;
+      console.log(action.payload)
       return  {
         ...state,
         focusStock: name,
-        history
+        history,
+        historyDates,
+        historyPrices
       }
     default:
       return state;

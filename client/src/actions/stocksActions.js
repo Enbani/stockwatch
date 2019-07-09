@@ -76,8 +76,16 @@ export const getHistorical = (symbol) => {
   return async dispatch => {
     try {
       const histResponse = await axios.get(`/api/v1/stocks/historical?stock=${symbol}`);
-      console.log(histResponse);
       let { history, name } =  histResponse.data.payload;
+      let historyDates = [];
+      let historyPrices = []
+
+      Object.keys(history).sort().forEach((date) => {
+        historyDates.push(date)
+        historyPrices.push(history[date].close)
+      });
+
+      dispatch(addHistory({history, name, historyDates, historyPrices}))
 
     } catch (e) {
       console.log(e)

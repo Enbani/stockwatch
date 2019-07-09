@@ -1,20 +1,26 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Bar } from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
 
 
 class StockChart extends Component {
+  componentDidMount() {
+    console.log(this.props.focusStock);
+  };
+
   render(){
+    // let { dates, prices } = this.props;
+    // console.log(dates, prices);
     return(
       <div className='charts-container'>
-        <Bar
+        <Line
           data={{
-            labels: ["January", "February", "March", "April", "May", "June", "July"],
+            labels: this.props.dates,
             datasets: [{
-            label: "My First dataset",
+            label: `${this.props.focusStock}`,
             backgroundColor: 'rgb(255, 99, 132)',
             borderColor: 'rgb(255, 99, 132)',
-            data: [0, 10, 5, 2, 20, 30, 45],
+            data: this.props.prices,
             }]
           }}
           />
@@ -26,7 +32,9 @@ class StockChart extends Component {
 const mapStateToProps = (state) => {
   return {
     history: state.stocks.history,
-    focusStock: state.stocks.focusStock
+    focusStock: state.stocks.focusStock,
+    dates: state.stocks.historyDates,
+    prices: state.stocks.historyPrices
   }
 };
 
