@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { Card, Nav } from './common';
 import TickerSearch from './tickerSearch';
 import Carosel from './carosel';
+import StockChart from './stockCharts';
 // import actions
 import { fetchStocks } from '../actions/stocksActions';
 
@@ -24,6 +25,7 @@ class Main extends Component {
         <TickerSearch/>
         <Carosel
         />
+      <StockChart/>
       </div>
     )
   }
