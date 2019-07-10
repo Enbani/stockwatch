@@ -2,6 +2,8 @@ require('./config/config');
 // require packages
 const express = require('express');
 const bodyParser = require('body-parser');
+const socketIO = require('socket.io');
+const http = require('http');
 
 // require db configs
 const { mongoose } = require('./db/mongoose');
@@ -16,6 +18,11 @@ const environment = process.env.ENVIRONMENT;
 // init app
 const app = express();
 
+// init sockets
+const server = http.createServer(app);
+const io = socketIO.listen(server);
+require('./sockets')(io);
+
 // treat all requests as json
 app.use(bodyParser.json());
 
@@ -24,8 +31,8 @@ app.use('/api/v1/stocks', stockRouter);
 
 
 // start server and listen on the configured port
-app.listen(port, () => {
-  console.log(`app server started at port ${port}`);
+server.listen(port, () => {
+  console.log(`app and socket server started at port ${port}`);
 });
 
 module.exports = { app };

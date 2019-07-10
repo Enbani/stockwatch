@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+
 // import components
 import { Nav } from './common';
 import TickerSearch from './tickerSearch';
 import Carosel from './carosel';
 import StockChart from './stockCharts';
 // import actions
-import { fetchStocks } from '../actions/stocksActions';
+import { fetchStocks, connectToSocket } from '../actions';
 
 
 class Main extends Component {
   componentDidMount() {
+    this.props.connectToSocket();
     this.props.fetchStocks();
   }
 
@@ -33,8 +35,9 @@ class Main extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    stocksList: state.stocks.stocksList
+    stocksList: state.stocks.stocksList,
+    socket: state.socket
   }
 }
 
-export default connect(mapStateToProps,{ fetchStocks })(Main);
+export default connect(mapStateToProps,{ fetchStocks, connectToSocket })(Main);
