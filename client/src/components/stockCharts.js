@@ -18,10 +18,42 @@ class StockChart extends Component {
             labels: this.props.dates,
             datasets: [{
             label: `${this.props.focusStock}`,
-            backgroundColor: 'rgb(255, 99, 132)',
+            backgroundColor: 'rgb(0, 0, 0)',
             borderColor: 'rgb(255, 99, 132)',
             data: this.props.prices,
             }]
+          }}
+          options={{
+            title: {
+              display: true,
+              text: `${this.props.focusStock}`,
+              fontSize: 28
+            },
+            legend: {
+              display: false
+            },
+            scales: {
+              yAxes: [{
+                scaleLabel: {
+                  display: true,
+                  labelString: 'Price (USD)'
+                }
+              }],
+              xAxes: [{
+                scaleLabel: {
+                  display: true,
+                  labelString: 'Date'
+                }
+              }]
+            },
+            layout: {
+              padding : {
+                left: 10,
+                right: 10,
+                bottom: 10,
+                top: 10
+              }
+            }
           }}
           />
       </div>
