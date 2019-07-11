@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import io from 'socket.io-client';
+
 
 // import components
 import { Nav } from './common';
@@ -13,9 +15,40 @@ import { fetchStocks, connectToSocket } from '../actions';
 
 class Main extends Component {
   componentDidMount() {
-    this.props.connectToSocket();
+    // const { socket, stocksList } = this.props;
+    // this.props.connectToSocket()
+    this.connectSocket()
+      .then((socket) => {
+         socket.emit('fetchStocks',{}, (err) => {
+           if (err) {
+             console.log(err);
+           }
+        })
+      })
     this.props.fetchStocks();
+
+
+    // socket.emit('fetchStocks',{}, (err) => {
+    //   if (err) {
+    //     console.log(err);
+    //   }
+    // })
   }
+
+  connectSocket() {
+    return new Promise((resolve, reject) => {
+      let socket = io('http://localhost:8080/', {
+        transports: ['websocket']
+      })
+
+      socket.on('connect', () => {
+        console.log('Connected to websocket');
+        resolve(socket)
+      })
+    })
+  }
+
+
 
   render() {
     return(
@@ -36,7 +69,7 @@ class Main extends Component {
 const mapStateToProps = (state) => {
   return {
     stocksList: state.stocks.stocksList,
-    socket: state.socket
+    socket: state.socket.socket
   }
 }
 
