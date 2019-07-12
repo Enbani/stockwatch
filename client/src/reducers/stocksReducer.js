@@ -14,6 +14,7 @@ const INITIAL_STATE =  {
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case GET_STOCKS:
+    console.log(action.payload)
       return {
         ...state,
         stocksList: action.payload

@@ -19,22 +19,24 @@ class Carosel extends Component {
     let { stocksList } = this.props;
     console.log('this is stocksList: ', stocksList);
 
+    if (stocksList !== null) {
     let stocks = stocksList.map((stock, index) => {
 
       return(
         <Card
-          key={stock._id}
+          key={stock.symbol}
           cardId={stock.symbol}
           title={stock.symbol}
           body={stock.description}
           footer={stock.exchange}
-          closeButtonValue={stock._id}
+          closeButtonValue={stock.symbol}
           onCloseClick={this.onCardClose.bind(this)}
           onCardClick={this.onCardClick.bind(this)}
           />
       )
     })
     return stocks;
+  }
   };
 
   render() {

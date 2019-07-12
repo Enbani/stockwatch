@@ -10,29 +10,48 @@ import TickerSearch from './tickerSearch';
 import Carosel from './carosel';
 import StockChart from './stockCharts';
 // import actions
-import { fetchStocks, connectToSocket } from '../actions';
+import { fetchStocks, connectToSocket, addStocksList } from '../actions';
 
 
 class Main extends Component {
+  // constructor(props) {
+  //   super(props);
+  //
+  //   this.state = {
+  //     socket: ''
+  //   };
+  // }
+
+  state = {
+    socket: ''
+  }
+
   componentDidMount() {
-    // const { socket, stocksList } = this.props;
-    // this.props.connectToSocket()
-    this.connectSocket()
-      .then((socket) => {
-         socket.emit('fetchStocks',{}, (err) => {
-           if (err) {
-             console.log(err);
-           }
-        })
-      })
     this.props.fetchStocks();
 
+    this.connectSocket()
+      .then((socket) => {
+        socket.on('updateStocks', (data) => {
+          console.log(data);
+          this.props.addStocksList(data)
+        })
 
-    // socket.emit('fetchStocks',{}, (err) => {
-    //   if (err) {
-    //     console.log(err);
-    //   }
-    // })
+        setInterval(() => {
+          let { stocksList } = this.props;
+
+          if (stocksList !== null) {
+            let stocks = stocksList.map((stock) => {
+              return stock.symbol
+            }).join()
+
+            socket.emit('fetchStocks',{stocks}, (err) => {
+              if (err) {
+                console.log(err);
+              }
+            })
+          }
+        }, 4000)
+      })
   }
 
   connectSocket() {
@@ -43,11 +62,13 @@ class Main extends Component {
 
       socket.on('connect', () => {
         console.log('Connected to websocket');
+        this.setState({
+          socket
+        })
         resolve(socket)
       })
     })
   }
-
 
 
   render() {
@@ -73,4 +94,8 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps,{ fetchStocks, connectToSocket })(Main);
+export default connect(mapStateToProps,{
+  fetchStocks,
+  connectToSocket,
+  addStocksList
+ })(Main);

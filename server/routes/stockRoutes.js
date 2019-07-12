@@ -58,13 +58,14 @@ router.get('/historical', async (req, res) => {
   }
 });
 
-router.delete('/remove-stock/:id', async (req, res) => {
-  const { id } = req.params;
+router.delete('/remove-stock/:symbol', async (req, res) => {
+  const { symbol } = req.params;
 
   try {
-    const stock = await Stock.findOneAndRemove({ _id: id });
+    const stock = await Stock.findOneAndRemove({ symbol });
     return res.send({ payload: stock });
   } catch (e) {
+    console.log(e)
     return res.status(400).send({ error: e.message });
   }
 });

@@ -58,10 +58,10 @@ export const addStock = (ticker) => {
   }
 }
 
-export const removeStock = (id) => {
+export const removeStock = (symbol) => {
   return async dispatch => {
     try {
-      const stocksResponse = await axios.delete(`/api/v1/stocks/remove-stock/${id}`);
+      const stocksResponse = await axios.delete(`/api/v1/stocks/remove-stock/${symbol}`);
       console.log(stocksResponse)
       dispatch(removeSingleStock(stocksResponse.data.payload));
     } catch (e) {
