@@ -27,8 +27,8 @@ class Carosel extends Component {
           key={stock.symbol}
           cardId={stock.symbol}
           title={stock.symbol}
-          body={stock.description}
-          footer={stock.exchange}
+          body={stock.name}
+          footer={stock.stock_exchange_long}
           closeButtonValue={stock.symbol}
           onCloseClick={this.onCardClose.bind(this)}
           onCardClick={this.onCardClick.bind(this)}

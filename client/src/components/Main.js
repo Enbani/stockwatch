@@ -50,7 +50,7 @@ class Main extends Component {
               }
             })
           }
-        }, 4000)
+        }, 60000)
       })
   }
 

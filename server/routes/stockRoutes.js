@@ -27,12 +27,44 @@ router.get('/add-stock', async (req, res) => {
   try {
     const data = await axios.get(`https://api.worldtradingdata.com/api/v1/stock?symbol=${stock}&api_token=${apiKey}`);
     const stockData = data.data.data[0];
+    const {
+      name,
+      currency,
+      stock_exchange_long,
+      price,
+      price_open,
+      day_high,
+      day_low,
+      day_change,
+      change_pct,
+      close_yesterday,
+      market_cap,
+      volume,
+      volume_avg,
+      shares,
+      stock_exchange_short,
+      symbol
+    } = stockData
+
+
     const body = {
-      symbol: stockData.symbol,
-      description: stockData.name,
-      currency: stockData.currency,
-      exchange: stockData.stock_exchange_long
-    };
+      name,
+      currency,
+      stock_exchange_long,
+      price,
+      price_open,
+      day_high,
+      day_low,
+      day_change,
+      change_pct,
+      close_yesterday,
+      market_cap,
+      volume,
+      volume_avg,
+      shares,
+      stock_exchange_short,
+      symbol
+    }
 
     const newStock = new Stock(body);
     const savedStock = await newStock.save();
